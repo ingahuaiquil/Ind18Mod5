@@ -23,10 +23,13 @@ class MainActivity : AppCompatActivity() {
 
         //Rescatar la información
         binding.btGuardar.setOnClickListener(){
-
+            val texto=binding.etTexto.toString()
+            val entero=binding.etEntero.toString()
+            val decimal=binding.etDecimal.toString()
+            val boleano= binding.switch1.isChecked
 
             // guardar datos
-            guardarDatos(texto, entero, decimal, boleano)
+            guardarDatos(texto, entero.toInt(), decimal.toFloat(), boleano)
         }
 
         //Mostrar datos
@@ -42,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     private fun guardarDatos(texto: String, entero: Int, decimal: Float, boleano: Boolean){
         //
         mSharedPreferences.edit().putString("miTexto", texto).apply()
-        mSharedPreferences.edit().putInt("miTexto", entero).apply()
+        mSharedPreferences.edit().putInt("miEntero", entero).apply()
         mSharedPreferences.edit().putFloat("miDecimal", decimal).apply()
         mSharedPreferences.edit().putBoolean("miBooleano", boleano).apply()
 
@@ -51,10 +54,10 @@ class MainActivity : AppCompatActivity() {
 
     //Mostrar datos
     private fun mostrarDatos() {
-        val texto=mSharedPreferences.getString("miText","")
+        val texto=mSharedPreferences.getString("miTexto","")
         val entero=mSharedPreferences.getInt("miEntero", 0)
-        val decimal=mSharedPreferences.getFloat("miDecimal", )
-        val boleano=mSharedPreferences.getBoolean("miBoleano", false)
+        val decimal=mSharedPreferences.getFloat("miDecimal", 0.0f)
+        val boleano=mSharedPreferences.getBoolean("miBooleano", false)
 
         binding.tvTexto.text=texto
         binding.tvEntero.text=entero.toString()
